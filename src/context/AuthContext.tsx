@@ -55,6 +55,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       try {
         setIsLoading(true);
 
+        if (!supabase.auth) {
+          console.warn('Supabase Auth not available');
+          setIsLoading(false);
+          return;
+        }
+
         const {
           data: { session },
         } = await supabase.auth.getSession();
@@ -94,6 +100,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     };
 
     initializeAuth();
+
+    if (!supabase.auth) {
+      return;
+    }
 
     const {
       data: { subscription },
