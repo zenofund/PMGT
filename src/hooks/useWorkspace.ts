@@ -20,6 +20,10 @@ export const useWorkspace = () => {
     setIsLoading(true);
     setError(null);
     try {
+      if (!supabase.from) {
+        throw new Error('Supabase is not configured. Please check your environment variables.');
+      }
+
       const { data, error: fetchError } = await supabase
         .from('workspaces')
         .select('*')
@@ -45,6 +49,10 @@ export const useWorkspace = () => {
     setIsLoading(true);
     setError(null);
     try {
+      if (!supabase.from) {
+        throw new Error('Supabase is not configured. Please check your environment variables.');
+      }
+
       const { data, error: createError } = await supabase
         .from('workspaces')
         .insert([{ name, ...workspaceData }])
@@ -72,6 +80,10 @@ export const useWorkspace = () => {
     setIsLoading(true);
     setError(null);
     try {
+      if (!supabase.from) {
+        throw new Error('Supabase is not configured. Please check your environment variables.');
+      }
+
       const { data, error: fetchError } = await supabase
         .from('settings')
         .select('*')
@@ -100,6 +112,10 @@ export const useWorkspace = () => {
     setIsLoading(true);
     setError(null);
     try {
+      if (!supabase.from) {
+        throw new Error('Supabase is not configured. Please check your environment variables.');
+      }
+
       const { data, error: updateError } = await supabase
         .from('settings')
         .update(settingsData)
