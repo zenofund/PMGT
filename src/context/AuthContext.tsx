@@ -56,7 +56,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setIsLoading(true);
 
         if (!supabase.auth) {
-          console.warn('Supabase Auth not available');
+          console.warn('Supabase Auth not available - app running in demo mode');
           setIsLoading(false);
           return;
         }
