@@ -14,6 +14,10 @@ export const handleSupabaseError = (error: any): string => {
 
 export const fetchUserProfile = async (userId: string) => {
   try {
+    if (!supabase.from) {
+      throw new Error('Supabase is not configured');
+    }
+
     const { data, error } = await supabase
       .from('users')
       .select('*')
@@ -29,6 +33,10 @@ export const fetchUserProfile = async (userId: string) => {
 
 export const fetchWorkspaceSettings = async (workspaceId: string) => {
   try {
+    if (!supabase.from) {
+      throw new Error('Supabase is not configured');
+    }
+
     const { data, error } = await supabase
       .from('settings')
       .select('*')
@@ -47,6 +55,10 @@ export const updateWorkspaceSettings = async (
   updates: Record<string, any>
 ) => {
   try {
+    if (!supabase.from) {
+      throw new Error('Supabase is not configured');
+    }
+
     const { data, error } = await supabase
       .from('settings')
       .update(updates)
@@ -63,6 +75,10 @@ export const updateWorkspaceSettings = async (
 
 export const fetchSubscriptionPlans = async () => {
   try {
+    if (!supabase.from) {
+      throw new Error('Supabase is not configured');
+    }
+
     const { data, error } = await supabase.from('plans').select('*').order('price', { ascending: true });
 
     if (error) throw error;
@@ -74,6 +90,10 @@ export const fetchSubscriptionPlans = async () => {
 
 export const fetchWorkspaceSubscription = async (workspaceId: string) => {
   try {
+    if (!supabase.from) {
+      throw new Error('Supabase is not configured');
+    }
+
     const { data, error } = await supabase
       .from('subscriptions')
       .select('*')
