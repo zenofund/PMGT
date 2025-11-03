@@ -69,10 +69,11 @@
 
   html {
     scroll-behavior: smooth;
+    font-family: 'Inter', sans-serif;
   }
 
   body {
-    @apply bg-background text-foreground font-inter antialiased;
+    @apply bg-background text-foreground antialiased;
   }
 
   :where(p, span, li, h1, h2, h3, h4, h5, h6, a, button, label, td, th) {
