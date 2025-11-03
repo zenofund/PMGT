@@ -5,6 +5,7 @@ import { Loader } from '@modules/shared/components/Loader';
 import { ProtectedRoute } from './ProtectedRoute';
 import { ROLES } from '@utils/constants';
 
+const Landing = lazy(() => import('@/pages/Landing'));
 const Login = lazy(() => import('@/pages/Login'));
 const Register = lazy(() => import('@/pages/Register'));
 const ForgotPassword = lazy(() => import('@/pages/ForgotPassword'));
@@ -196,8 +197,17 @@ export const AppRouter: React.FC = () => {
             }
           />
 
-          {/* Root Redirect */}
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          {/* Root Route */}
+          <Route
+            path="/"
+            element={
+              user ? (
+                <Navigate to="/dashboard" replace />
+              ) : (
+                <Landing />
+              )
+            }
+          />
 
           {/* 404 */}
           <Route path="*" element={<NotFound />} />
