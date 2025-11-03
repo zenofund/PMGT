@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthStore } from '@stores/authStore';
+import { useAuthContext } from '@context/AuthContext';
 import { Loader } from '@modules/shared/components/Loader';
 import { ProtectedRoute } from './ProtectedRoute';
 import { ROLES } from '@utils/constants';
@@ -73,6 +74,7 @@ const ModuleLoader = () => <Loader fullScreen />;
 
 export const AppRouter: React.FC = () => {
   const user = useAuthStore((state) => state.user);
+  const { isLoading } = useAuthContext();
 
   return (
     <BrowserRouter>
@@ -201,7 +203,9 @@ export const AppRouter: React.FC = () => {
           <Route
             path="/"
             element={
-              user ? (
+              isLoading ? (
+                <Loader fullScreen />
+              ) : user ? (
                 <Navigate to="/dashboard" replace />
               ) : (
                 <Landing />
