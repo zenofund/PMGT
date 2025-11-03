@@ -14,6 +14,10 @@ export const useAuth = () => {
     setIsLoading(true);
     setError(null);
     try {
+      if (!supabase.auth) {
+        throw new Error('Supabase is not configured. Please check your environment variables.');
+      }
+
       const { data, error: signInError } = await supabase.auth.signInWithPassword({
         email,
         password,
@@ -51,6 +55,10 @@ export const useAuth = () => {
     setIsLoading(true);
     setError(null);
     try {
+      if (!supabase.auth) {
+        throw new Error('Supabase is not configured. Please check your environment variables.');
+      }
+
       const { data, error: signUpError } = await supabase.auth.signUp({
         email,
         password,
@@ -81,6 +89,12 @@ export const useAuth = () => {
     setIsLoading(true);
     setError(null);
     try {
+      if (!supabase.auth) {
+        setUser(null);
+        setAuthenticated(false);
+        return { success: true };
+      }
+
       const { error: signOutError } = await supabase.auth.signOut();
       if (signOutError) throw signOutError;
       setUser(null);
@@ -99,6 +113,10 @@ export const useAuth = () => {
     setIsLoading(true);
     setError(null);
     try {
+      if (!supabase.auth) {
+        throw new Error('Supabase is not configured. Please check your environment variables.');
+      }
+
       const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: `${window.location.origin}/auth/reset-password`,
       });
@@ -122,6 +140,10 @@ export const useAuth = () => {
     setIsLoading(true);
     setError(null);
     try {
+      if (!supabase.auth) {
+        throw new Error('Supabase is not configured. Please check your environment variables.');
+      }
+
       const { error: updateError } = await supabase.auth.updateUser({
         password: newPassword,
       });
