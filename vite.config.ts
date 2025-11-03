@@ -27,4 +27,4 @@ export default defineConfig(({ mode }) => ({
       "@utils": path.resolve(__dirname, "./src/utils"),
     },
   },
-}))
+}));

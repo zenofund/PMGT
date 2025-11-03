@@ -1,12 +1,14 @@
-import React from 'react';
-import { Navbar } from '../components/Navbar';
-import { Sidebar } from '../components/Sidebar';
+import React from "react";
+import { Navbar } from "../components/Navbar";
+import { Sidebar } from "../components/Sidebar";
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
 }
 
-export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
+export const DashboardLayout: React.FC<DashboardLayoutProps> = ({
+  children,
+}) => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-950">
       <Navbar />

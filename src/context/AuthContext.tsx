@@ -1,26 +1,31 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { supabase } from '@config/supabaseClient';
-import { useAuthStore } from '@stores/authStore';
-import { useWorkspaceStore } from '@stores/workspaceStore';
-import { useSettingsStore } from '@stores/settingsStore';
-import { SESSION_TIMEOUT } from '@utils/constants';
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { supabase } from "@config/supabaseClient";
+import { useAuthStore } from "@stores/authStore";
+import { useWorkspaceStore } from "@stores/workspaceStore";
+import { useSettingsStore } from "@stores/settingsStore";
+import { SESSION_TIMEOUT } from "@utils/constants";
 
 interface AuthContextType {
   isLoading: boolean;
   isSessionValid: boolean;
 }
 
-const AuthContext = createContext<AuthContextType>({ isLoading: true, isSessionValid: false });
+const AuthContext = createContext<AuthContextType>({
+  isLoading: true,
+  isSessionValid: false,
+});
 
 export const useAuthContext = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error('useAuthContext must be used within AuthProvider');
+    throw new Error("useAuthContext must be used within AuthProvider");
   }
   return context;
 };
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isSessionValid, setIsSessionValid] = useState(false);
   const [sessionTimer, setSessionTimer] = useState<NodeJS.Timeout | null>(null);
@@ -28,7 +33,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const setUser = useAuthStore((state) => state.setUser);
   const setAuthenticated = useAuthStore((state) => state.setAuthenticated);
   const setWorkspace = useWorkspaceStore((state) => state.setWorkspace);
-  const setCurrentWorkspaceId = useWorkspaceStore((state) => state.setCurrentWorkspaceId);
+  const setCurrentWorkspaceId = useWorkspaceStore(
+    (state) => state.setCurrentWorkspaceId,
+  );
   const setSettings = useSettingsStore((state) => state.setSettings);
 
   const resetSessionTimer = () => {
@@ -56,7 +63,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         setIsLoading(true);
 
         if (!supabase.auth) {
-          console.warn('Supabase Auth not available - app running in demo mode');
+          console.warn(
+            "Supabase Auth not available - app running in demo mode",
+          );
           setIsLoading(false);
           return;
         }
@@ -71,9 +80,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
           const userData = {
             id: session.user.id,
-            email: session.user.email || '',
-            role: session.user.user_metadata?.role || 'tenant',
-            workspace_id: session.user.user_metadata?.workspace_id || '',
+            email: session.user.email || "",
+            role: session.user.user_metadata?.role || "tenant",
+            workspace_id: session.user.user_metadata?.workspace_id || "",
             avatar_url: session.user.user_metadata?.avatar_url,
             full_name: session.user.user_metadata?.full_name,
           };
@@ -90,7 +99,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           setIsSessionValid(false);
         }
       } catch (error) {
-        console.error('Auth initialization error:', error);
+        console.error("Auth initialization error:", error);
         setUser(null);
         setAuthenticated(false);
         setIsSessionValid(false);
@@ -108,19 +117,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (event === 'SIGNED_IN' && session?.user) {
+      if (event === "SIGNED_IN" && session?.user) {
         setUser({
           id: session.user.id,
-          email: session.user.email || '',
-          role: session.user.user_metadata?.role || 'tenant',
-          workspace_id: session.user.user_metadata?.workspace_id || '',
+          email: session.user.email || "",
+          role: session.user.user_metadata?.role || "tenant",
+          workspace_id: session.user.user_metadata?.workspace_id || "",
           avatar_url: session.user.user_metadata?.avatar_url,
           full_name: session.user.user_metadata?.full_name,
         });
         setAuthenticated(true);
         setIsSessionValid(true);
         resetSessionTimer();
-      } else if (event === 'SIGNED_OUT') {
+      } else if (event === "SIGNED_OUT") {
         setUser(null);
         setAuthenticated(false);
         setIsSessionValid(false);
@@ -129,7 +138,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         if (sessionTimer) {
           clearTimeout(sessionTimer);
         }
-      } else if (event === 'TOKEN_REFRESHED' && session?.user) {
+      } else if (event === "TOKEN_REFRESHED" && session?.user) {
         setIsSessionValid(true);
         resetSessionTimer();
       }
@@ -141,15 +150,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     };
 
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-    document.addEventListener('mousemove', resetSessionTimer);
-    document.addEventListener('keydown', resetSessionTimer);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    document.addEventListener("mousemove", resetSessionTimer);
+    document.addEventListener("keydown", resetSessionTimer);
 
     return () => {
       subscription?.unsubscribe();
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-      document.removeEventListener('mousemove', resetSessionTimer);
-      document.removeEventListener('keydown', resetSessionTimer);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      document.removeEventListener("mousemove", resetSessionTimer);
+      document.removeEventListener("keydown", resetSessionTimer);
       if (sessionTimer) {
         clearTimeout(sessionTimer);
       }

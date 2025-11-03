@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
 export interface WorkspaceSettings {
   workspace_id: string;
@@ -41,9 +41,7 @@ export const useSettingsStore = create<SettingsState>((set) => ({
 
   updateSetting: (key, value) =>
     set((state) => ({
-      settings: state.settings
-        ? { ...state.settings, [key]: value }
-        : null,
+      settings: state.settings ? { ...state.settings, [key]: value } : null,
     })),
 
   toggleFeature: (featureName, enabled) =>

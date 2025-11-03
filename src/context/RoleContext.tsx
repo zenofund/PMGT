@@ -1,6 +1,6 @@
-import React, { createContext, useContext } from 'react';
-import { useAuthStore } from '@stores/authStore';
-import { ROLES } from '@utils/constants';
+import React, { createContext, useContext } from "react";
+import { useAuthStore } from "@stores/authStore";
+import { ROLES } from "@utils/constants";
 
 interface RoleContextType {
   userRole: string | null;
@@ -16,12 +16,14 @@ const RoleContext = createContext<RoleContextType | null>(null);
 export const useRoleContext = () => {
   const context = useContext(RoleContext);
   if (!context) {
-    throw new Error('useRoleContext must be used within RoleProvider');
+    throw new Error("useRoleContext must be used within RoleProvider");
   }
   return context;
 };
 
-export const RoleProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const RoleProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const user = useAuthStore((state) => state.user);
   const userRole = user?.role || null;
 
@@ -32,7 +34,7 @@ export const RoleProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const canAccessModule = (moduleRole: string): boolean => {
     if (!userRole) return false;
-    
+
     if (isSuperAdmin) return true;
     return userRole === moduleRole;
   };

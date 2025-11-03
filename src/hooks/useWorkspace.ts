@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { supabase } from '@config/supabaseClient';
-import { useWorkspaceStore } from '@stores/workspaceStore';
-import { useSettingsStore } from '@stores/settingsStore';
+import { useState } from "react";
+import { supabase } from "@config/supabaseClient";
+import { useWorkspaceStore } from "@stores/workspaceStore";
+import { useSettingsStore } from "@stores/settingsStore";
 
 export const useWorkspace = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -21,13 +21,15 @@ export const useWorkspace = () => {
     setError(null);
     try {
       if (!supabase.from) {
-        throw new Error('Supabase is not configured. Please check your environment variables.');
+        throw new Error(
+          "Supabase is not configured. Please check your environment variables.",
+        );
       }
 
       const { data, error: fetchError } = await supabase
-        .from('workspaces')
-        .select('*')
-        .eq('owner_id', userId);
+        .from("workspaces")
+        .select("*")
+        .eq("owner_id", userId);
 
       if (fetchError) throw fetchError;
 
@@ -37,7 +39,8 @@ export const useWorkspace = () => {
       }
       return { success: true, data };
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch workspaces';
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to fetch workspaces";
       setError(errorMessage);
       return { success: false, error: errorMessage };
     } finally {
@@ -45,16 +48,21 @@ export const useWorkspace = () => {
     }
   };
 
-  const createWorkspace = async (name: string, workspaceData?: Record<string, any>) => {
+  const createWorkspace = async (
+    name: string,
+    workspaceData?: Record<string, any>,
+  ) => {
     setIsLoading(true);
     setError(null);
     try {
       if (!supabase.from) {
-        throw new Error('Supabase is not configured. Please check your environment variables.');
+        throw new Error(
+          "Supabase is not configured. Please check your environment variables.",
+        );
       }
 
       const { data, error: createError } = await supabase
-        .from('workspaces')
+        .from("workspaces")
         .insert([{ name, ...workspaceData }])
         .select()
         .single();
@@ -68,7 +76,8 @@ export const useWorkspace = () => {
 
       return { success: true, data };
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to create workspace';
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to create workspace";
       setError(errorMessage);
       return { success: false, error: errorMessage };
     } finally {
@@ -81,23 +90,26 @@ export const useWorkspace = () => {
     setError(null);
     try {
       if (!supabase.from) {
-        throw new Error('Supabase is not configured. Please check your environment variables.');
+        throw new Error(
+          "Supabase is not configured. Please check your environment variables.",
+        );
       }
 
       const { data, error: fetchError } = await supabase
-        .from('settings')
-        .select('*')
-        .eq('workspace_id', workspaceId)
+        .from("settings")
+        .select("*")
+        .eq("workspace_id", workspaceId)
         .single();
 
-      if (fetchError && fetchError.code !== 'PGRST116') throw fetchError;
+      if (fetchError && fetchError.code !== "PGRST116") throw fetchError;
 
       if (data) {
         setSettings(data);
       }
       return { success: true, data };
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to fetch settings';
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to fetch settings";
       setError(errorMessage);
       return { success: false, error: errorMessage };
     } finally {
@@ -107,19 +119,21 @@ export const useWorkspace = () => {
 
   const updateWorkspaceSettings = async (
     workspaceId: string,
-    settingsData: Record<string, any>
+    settingsData: Record<string, any>,
   ) => {
     setIsLoading(true);
     setError(null);
     try {
       if (!supabase.from) {
-        throw new Error('Supabase is not configured. Please check your environment variables.');
+        throw new Error(
+          "Supabase is not configured. Please check your environment variables.",
+        );
       }
 
       const { data, error: updateError } = await supabase
-        .from('settings')
+        .from("settings")
         .update(settingsData)
-        .eq('workspace_id', workspaceId)
+        .eq("workspace_id", workspaceId)
         .select()
         .single();
 
@@ -128,7 +142,8 @@ export const useWorkspace = () => {
       setSettings(data);
       return { success: true, data };
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to update settings';
+      const errorMessage =
+        err instanceof Error ? err.message : "Failed to update settings";
       setError(errorMessage);
       return { success: false, error: errorMessage };
     } finally {

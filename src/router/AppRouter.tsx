@@ -1,73 +1,73 @@
-import React, { Suspense, lazy } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { useAuthStore } from '@stores/authStore';
-import { useAuthContext } from '@context/AuthContext';
-import { Loader } from '@modules/shared/components/Loader';
-import { ProtectedRoute } from './ProtectedRoute';
-import { ROLES } from '@utils/constants';
+import React, { Suspense, lazy } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useAuthStore } from "@stores/authStore";
+import { useAuthContext } from "@context/AuthContext";
+import { Loader } from "@modules/shared/components/Loader";
+import { ProtectedRoute } from "./ProtectedRoute";
+import { ROLES } from "@utils/constants";
 
-const Landing = lazy(() => import('@/pages/Landing'));
-const Login = lazy(() => import('@/pages/Login'));
-const Register = lazy(() => import('@/pages/Register'));
-const ForgotPassword = lazy(() => import('@/pages/ForgotPassword'));
-const Dashboard = lazy(() => import('@/pages/Dashboard'));
-const NotFound = lazy(() => import('@/pages/NotFound'));
+const Landing = lazy(() => import("@/pages/Landing"));
+const Login = lazy(() => import("@/pages/Login"));
+const Register = lazy(() => import("@/pages/Register"));
+const ForgotPassword = lazy(() => import("@/pages/ForgotPassword"));
+const Dashboard = lazy(() => import("@/pages/Dashboard"));
+const NotFound = lazy(() => import("@/pages/NotFound"));
 
 const SuperAdminModule = lazy(() =>
-  import('@modules/superadmin').then((m) => ({
+  import("@modules/superadmin").then((m) => ({
     default: m.SuperAdminModule,
-  }))
+  })),
 );
 const LandlordModule = lazy(() =>
-  import('@modules/landlord').then((m) => ({
+  import("@modules/landlord").then((m) => ({
     default: m.LandlordModule,
-  }))
+  })),
 );
 const TenantModule = lazy(() =>
-  import('@modules/tenant').then((m) => ({
+  import("@modules/tenant").then((m) => ({
     default: m.TenantModule,
-  }))
+  })),
 );
 const StaffModule = lazy(() =>
-  import('@modules/staff').then((m) => ({
+  import("@modules/staff").then((m) => ({
     default: m.StaffModule,
-  }))
+  })),
 );
 
 const PropertyModule = lazy(() =>
-  import('@modules/property').then((m) => ({
+  import("@modules/property").then((m) => ({
     default: m.PropertyModule,
-  }))
+  })),
 );
 const PaymentsModule = lazy(() =>
-  import('@modules/payments').then((m) => ({
+  import("@modules/payments").then((m) => ({
     default: m.PaymentsModule,
-  }))
+  })),
 );
 const MaintenanceModule = lazy(() =>
-  import('@modules/maintenance').then((m) => ({
+  import("@modules/maintenance").then((m) => ({
     default: m.MaintenanceModule,
-  }))
+  })),
 );
 const ReportsModule = lazy(() =>
-  import('@modules/reports').then((m) => ({
+  import("@modules/reports").then((m) => ({
     default: m.ReportsModule,
-  }))
+  })),
 );
 const CommunicationModule = lazy(() =>
-  import('@modules/communication').then((m) => ({
+  import("@modules/communication").then((m) => ({
     default: m.CommunicationModule,
-  }))
+  })),
 );
 const AccountingModule = lazy(() =>
-  import('@modules/accounting').then((m) => ({
+  import("@modules/accounting").then((m) => ({
     default: m.AccountingModule,
-  }))
+  })),
 );
 const TenantPortalModule = lazy(() =>
-  import('@modules/tenant-portal').then((m) => ({
+  import("@modules/tenant-portal").then((m) => ({
     default: m.TenantPortalModule,
-  }))
+  })),
 );
 
 const ModuleLoader = () => <Loader fullScreen />;

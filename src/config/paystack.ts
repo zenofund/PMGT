@@ -1,16 +1,16 @@
-import { env } from './env';
+import { env } from "./env";
 
 export const paystackConfig = {
   publicKey: env.paystack.publicKey,
   secretKey: env.paystack.secretKey,
-  baseUrl: 'https://api.paystack.co',
+  baseUrl: "https://api.paystack.co",
 };
 
 export interface PaystackPlan {
   id: string;
   name: string;
   amount: number;
-  interval: 'monthly' | 'quarterly' | 'semi-annually' | 'annually';
+  interval: "monthly" | "quarterly" | "semi-annually" | "annually";
   currency: string;
 }
 
@@ -34,22 +34,29 @@ export interface PaystackVerifyResponse {
 }
 
 export const initializePaystackPayment = async (
-  transaction: PaystackTransaction
-): Promise<{ authorizationUrl: string; accessCode: string; reference: string } | null> => {
+  transaction: PaystackTransaction,
+): Promise<{
+  authorizationUrl: string;
+  accessCode: string;
+  reference: string;
+} | null> => {
   if (!paystackConfig.secretKey) {
-    console.error('Paystack secret key not configured');
+    console.error("Paystack secret key not configured");
     return null;
   }
 
   try {
-    const response = await fetch(`${paystackConfig.baseUrl}/transaction/initialize`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${paystackConfig.secretKey}`,
+    const response = await fetch(
+      `${paystackConfig.baseUrl}/transaction/initialize`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${paystackConfig.secretKey}`,
+        },
+        body: JSON.stringify(transaction),
       },
-      body: JSON.stringify(transaction),
-    });
+    );
 
     const data = await response.json();
     if (data.status) {
@@ -61,30 +68,33 @@ export const initializePaystackPayment = async (
     }
     return null;
   } catch (error) {
-    console.error('Paystack initialization error:', error);
+    console.error("Paystack initialization error:", error);
     return null;
   }
 };
 
 export const verifyPaystackTransaction = async (
-  reference: string
+  reference: string,
 ): Promise<PaystackVerifyResponse | null> => {
   if (!paystackConfig.secretKey) {
-    console.error('Paystack secret key not configured');
+    console.error("Paystack secret key not configured");
     return null;
   }
 
   try {
-    const response = await fetch(`${paystackConfig.baseUrl}/transaction/verify/${reference}`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${paystackConfig.secretKey}`,
+    const response = await fetch(
+      `${paystackConfig.baseUrl}/transaction/verify/${reference}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${paystackConfig.secretKey}`,
+        },
       },
-    });
+    );
 
     return await response.json();
   } catch (error) {
-    console.error('Paystack verification error:', error);
+    console.error("Paystack verification error:", error);
     return null;
   }
 };

@@ -1,31 +1,31 @@
-import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '@hooks/useAuth';
-import { AuthLayout } from '@modules/shared/layouts/AuthLayout';
-import { Input } from '@modules/shared/components/Input';
-import { Button } from '@modules/shared/components/Button';
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { useAuth } from "@hooks/useAuth";
+import { AuthLayout } from "@modules/shared/layouts/AuthLayout";
+import { Input } from "@modules/shared/components/Input";
+import { Button } from "@modules/shared/components/Button";
 
 const Login: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const { login, isLoading } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError("");
 
     if (!email || !password) {
-      setError('Please fill in all fields');
+      setError("Please fill in all fields");
       return;
     }
 
     const result = await login(email, password);
     if (result.success) {
-      navigate('/dashboard');
+      navigate("/dashboard");
     } else {
-      setError(result.error || 'Login failed');
+      setError(result.error || "Login failed");
     }
   };
 

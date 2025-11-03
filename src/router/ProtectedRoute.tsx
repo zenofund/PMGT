@@ -1,8 +1,8 @@
-import React from 'react';
-import { Navigate } from 'react-router-dom';
-import { useAuthStore } from '@stores/authStore';
-import { useAuthContext } from '@context/AuthContext';
-import { Loader } from '@modules/shared/components/Loader';
+import React from "react";
+import { Navigate } from "react-router-dom";
+import { useAuthStore } from "@stores/authStore";
+import { useAuthContext } from "@context/AuthContext";
+import { Loader } from "@modules/shared/components/Loader";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;

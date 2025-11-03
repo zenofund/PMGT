@@ -1,5 +1,5 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 export interface Workspace {
   id: string;
@@ -46,12 +46,12 @@ export const useWorkspaceStore = create<WorkspaceState>()(
       },
     }),
     {
-      name: 'workspace-store',
+      name: "workspace-store",
       partialize: (state) => ({
         workspace: state.workspace,
         workspaces: state.workspaces,
         currentWorkspaceId: state.currentWorkspaceId,
       }),
-    }
-  )
+    },
+  ),
 );

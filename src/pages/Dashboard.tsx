@@ -1,8 +1,8 @@
-import React from 'react';
-import { useAuthStore } from '@stores/authStore';
-import { useRole } from '@hooks/useRole';
-import { DashboardLayout } from '@modules/shared/layouts/DashboardLayout';
-import { Card, CardContent, CardHeader } from '@modules/shared/components/Card';
+import React from "react";
+import { useAuthStore } from "@stores/authStore";
+import { useRole } from "@hooks/useRole";
+import { DashboardLayout } from "@modules/shared/layouts/DashboardLayout";
+import { Card, CardContent, CardHeader } from "@modules/shared/components/Card";
 
 const Dashboard: React.FC = () => {
   const user = useAuthStore((state) => state.user);
@@ -10,16 +10,16 @@ const Dashboard: React.FC = () => {
 
   const getRoleLabel = () => {
     switch (userRole) {
-      case 'super_admin':
-        return 'Super Admin';
-      case 'landlord':
-        return 'Property Manager';
-      case 'tenant':
-        return 'Tenant';
-      case 'staff':
-        return 'Staff Member';
+      case "super_admin":
+        return "Super Admin";
+      case "landlord":
+        return "Property Manager";
+      case "tenant":
+        return "Tenant";
+      case "staff":
+        return "Staff Member";
       default:
-        return 'User';
+        return "User";
     }
   };
 
@@ -28,10 +28,11 @@ const Dashboard: React.FC = () => {
       <div className="space-y-8">
         <div>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
-            Welcome back, {user?.full_name || 'User'}!
+            Welcome back, {user?.full_name || "User"}!
           </h1>
           <p className="text-gray-600 dark:text-gray-400 mt-2">
-            You're logged in as a <span className="font-semibold">{getRoleLabel()}</span>
+            You're logged in as a{" "}
+            <span className="font-semibold">{getRoleLabel()}</span>
           </p>
         </div>
 
@@ -40,7 +41,9 @@ const Dashboard: React.FC = () => {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-600">0</div>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">Properties</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                  Properties
+                </p>
               </div>
             </CardContent>
           </Card>
@@ -49,7 +52,9 @@ const Dashboard: React.FC = () => {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-green-600">$0</div>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">Revenue</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                  Revenue
+                </p>
               </div>
             </CardContent>
           </Card>
@@ -58,7 +63,9 @@ const Dashboard: React.FC = () => {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-orange-600">0</div>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">Tenants</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                  Tenants
+                </p>
               </div>
             </CardContent>
           </Card>
@@ -67,7 +74,9 @@ const Dashboard: React.FC = () => {
             <CardContent className="pt-6">
               <div className="text-center">
                 <div className="text-3xl font-bold text-purple-600">0</div>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">Requests</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                  Requests
+                </p>
               </div>
             </CardContent>
           </Card>
@@ -75,7 +84,9 @@ const Dashboard: React.FC = () => {
 
         <Card>
           <CardHeader>
-            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">Quick Start</h2>
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
+              Quick Start
+            </h2>
           </CardHeader>
           <CardContent>
             <div className="space-y-3 text-sm">

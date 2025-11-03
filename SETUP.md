@@ -3,6 +3,7 @@
 ## Overview
 
 PropertyHub is a modular, multi-tenant Property Management SaaS application built with:
+
 - **Frontend**: React 18 + Vite + TailwindCSS
 - **Backend**: Supabase (Auth, Database, Storage, Edge Functions)
 - **Payments**: Paystack Integration
@@ -182,6 +183,7 @@ The app will be available at `http://localhost:8080`
 ### Multi-Tenant Structure
 
 Each landlord/company (workspace) has its own data scope:
+
 - Workspace owns properties, tenants, and settings
 - Users belong to workspaces with specific roles
 - All queries are scoped to the current workspace
@@ -198,6 +200,7 @@ Each landlord/company (workspace) has its own data scope:
 ### Module System
 
 All modules are lazy-loaded for better performance:
+
 - Routes: `/dashboard/{module}/*`
 - Each module is a self-contained feature
 - Modules can be toggled via `feature_toggles`
@@ -258,6 +261,7 @@ export const MyModule: React.FC = () => (
 ### Adding a New API Hook
 
 Create in `src/hooks/` following the pattern of existing hooks:
+
 - Use Zustand stores for state
 - Handle errors gracefully
 - Return consistent API (success, error, isLoading)
@@ -265,6 +269,7 @@ Create in `src/hooks/` following the pattern of existing hooks:
 ## Paystack Integration
 
 Placeholder functions for Paystack are in `src/config/paystack.ts`:
+
 - `initializePaystackPayment()` - Initialize payment
 - `verifyPaystackTransaction()` - Verify payment
 
@@ -278,8 +283,9 @@ Implement with your Paystack backend endpoint.
 - Cleans up on page visibility change
 
 Configure in `src/utils/constants.ts`:
+
 ```typescript
-SESSION_TIMEOUT = 30 * 60 * 1000 // milliseconds
+SESSION_TIMEOUT = 30 * 60 * 1000; // milliseconds
 ```
 
 ## Deployment
@@ -313,6 +319,7 @@ vercel --prod
 ## Support
 
 For issues or questions:
+
 - Check the Supabase documentation: https://supabase.com/docs
 - Review Paystack integration: https://paystack.com/docs
 - React Router documentation: https://reactrouter.com

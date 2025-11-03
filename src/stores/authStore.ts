@@ -1,5 +1,5 @@
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 export interface User {
   id: string;
@@ -16,7 +16,7 @@ export interface AuthState {
   isAuthenticated: boolean;
   isLoading: boolean;
   sessionTimeout: number | null;
-  
+
   setUser: (user: User | null) => void;
   setAuthenticated: (authenticated: boolean) => void;
   setLoading: (loading: boolean) => void;
@@ -34,7 +34,8 @@ export const useAuthStore = create<AuthState>()(
       sessionTimeout: null,
 
       setUser: (user) => set({ user, isAuthenticated: !!user }),
-      setAuthenticated: (authenticated) => set({ isAuthenticated: authenticated }),
+      setAuthenticated: (authenticated) =>
+        set({ isAuthenticated: authenticated }),
       setLoading: (loading) => set({ isLoading: loading }),
       setSessionTimeout: (timeout) => set({ sessionTimeout: timeout }),
       logout: () =>
@@ -46,11 +47,11 @@ export const useAuthStore = create<AuthState>()(
       clearError: () => set({}),
     }),
     {
-      name: 'auth-store',
+      name: "auth-store",
       partialize: (state) => ({
         user: state.user,
         isAuthenticated: state.isAuthenticated,
       }),
-    }
-  )
+    },
+  ),
 );

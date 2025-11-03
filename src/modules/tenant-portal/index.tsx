@@ -1,16 +1,19 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { DashboardLayout } from '@modules/shared/layouts/DashboardLayout';
-import { Card, CardContent } from '@modules/shared/components/Card';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import { DashboardLayout } from "@modules/shared/layouts/DashboardLayout";
+import { Card, CardContent } from "@modules/shared/components/Card";
 
 const TenantPortalDashboard: React.FC = () => (
   <DashboardLayout>
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Tenant Self-Service Portal</h1>
+      <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+        Tenant Self-Service Portal
+      </h1>
       <Card>
         <CardContent className="pt-6">
           <p className="text-gray-600 dark:text-gray-400">
-            Tenant Portal module is ready for development. Provide a dedicated space for tenant interactions.
+            Tenant Portal module is ready for development. Provide a dedicated
+            space for tenant interactions.
           </p>
         </CardContent>
       </Card>

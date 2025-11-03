@@ -96,6 +96,7 @@ export const MyModule: React.FC = () => (
 ```
 
 Each module can be:
+
 - ✅ Independently developed
 - ✅ Toggle-able via feature toggles
 - ✅ Extended with sub-routes
@@ -108,9 +109,9 @@ Payment functions are prepared in `src/config/paystack.ts`:
 ```typescript
 // Initialize payment
 const result = await initializePaystackPayment({
-  email: 'tenant@example.com',
+  email: "tenant@example.com",
   amount: 50000, // in kobo
-  reference: 'UNIQUE_REF',
+  reference: "UNIQUE_REF",
 });
 
 // Verify payment
@@ -120,6 +121,7 @@ const verification = await verifyPaystackTransaction(reference);
 ## 🎨 UI Components
 
 Pre-built shared components:
+
 - `Button` - With multiple variants and states
 - `Card` - With header, content, footer sections
 - `Input` - Form input with validation
@@ -132,12 +134,14 @@ Pre-built shared components:
 ## 🌐 Database Schema
 
 ### Core Tables
+
 - `workspaces` - Tenant organization
 - `settings` - Workspace configuration
 - `plans` - Subscription plans
 - `subscriptions` - Active subscriptions
 
 ### Additional Tables (to implement)
+
 - `properties` - Property listings
 - `tenants` - Tenant records
 - `leases` - Lease agreements
@@ -150,24 +154,28 @@ See `SETUP.md` for SQL schema.
 ## 🎯 Features
 
 ### Super Admin Module
+
 - Manage platform users
 - Configure subscription plans
 - View platform analytics
 - White-label settings
 
 ### Landlord Module
+
 - Create and manage properties
 - Manage tenant relationships
 - Track rental income
 - Monitor maintenance requests
 
 ### Tenant Module
+
 - View lease details
 - Make rent payments
 - Submit maintenance requests
 - Communicate with property manager
 
 ### Shared Features
+
 - Payment collection via Paystack
 - Maintenance request tracking
 - Communication hub
@@ -177,17 +185,19 @@ See `SETUP.md` for SQL schema.
 ## 🔄 State Management
 
 ### Zustand Stores
+
 ```typescript
-useAuthStore       // User session
-useWorkspaceStore  // Current workspace context
-useSettingsStore   // Workspace settings & features
+useAuthStore; // User session
+useWorkspaceStore; // Current workspace context
+useSettingsStore; // Workspace settings & features
 ```
 
 ### React Contexts
+
 ```typescript
-useAuthContext     // Auth initialization & session
-useRoleContext     // Role-based access control
-useTheme          // Dark/Light mode
+useAuthContext; // Auth initialization & session
+useRoleContext; // Role-based access control
+useTheme; // Dark/Light mode
 ```
 
 ## 🛣️ Routing
@@ -265,6 +275,7 @@ VITE_PAYSTACK_SECRET_KEY=   # Paystack secret key
 ## 🌙 Dark Mode
 
 Built-in dark mode support:
+
 - Toggle in navbar
 - Persisted in localStorage
 - System preference detection
@@ -289,11 +300,13 @@ When adding new features:
 ## 🚢 Deployment
 
 ### Netlify
+
 ```bash
 netlify deploy --prod
 ```
 
 ### Vercel
+
 ```bash
 vercel --prod
 ```
@@ -313,6 +326,7 @@ Proprietary - PropertyHub
 ## 🆘 Support
 
 For questions or issues:
+
 1. Check the documentation files
 2. Review existing module implementations
 3. Examine the shared components and hooks
